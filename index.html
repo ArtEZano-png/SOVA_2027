@@ -1,0 +1,1325 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sistema Operativo Vivo ALPHA · 9 Minutos</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+.logo-alpha{
+margin-bottom:1.5rem;
+display:flex;
+justify-content:center;
+align-items:center;
+animation:fadeUp 1s ease 0.1s both;
+}
+
+.logo-alpha img{
+width:120px;
+max-width:40vw;
+opacity:0.9;
+filter:drop-shadow(0 0 12px rgba(255,215,0,0.25));
+transition:all 0.4s ease;
+}
+
+.logo-alpha img:hover{
+transform:scale(1.05);
+opacity:1;
+}
+.logo-alpha img{
+width:120px;
+max-width:40vw;
+opacity:0.95;
+filter:drop-shadow(0 0 18px rgba(255,215,0,0.35));
+transition:all 0.5s ease;
+}
+
+.logo-alpha img:hover{
+transform:scale(1.08) rotate(1deg);
+filter:drop-shadow(0 0 28px rgba(255,215,0,0.6));
+}
+.logo-alpha.cierre{
+margin-bottom:2rem;
+margin-top:-1rem;
+}
+
+.logo-alpha.cierre img{
+width:140px;
+opacity:1;
+filter:drop-shadow(0 0 20px rgba(255,215,0,0.4));
+}
+  :root {
+    --zafiro:#0F52BA;--zafiro-deep:#082567;--zafiro-mid:#4682B4;--zafiro-pale:#B0C4DE;
+    --blanco:#F9F8FF;--rojo:#FF6B6B;--teal:#4ECDC4;--gold:#FFD700;--gris:#708090;--negro:#060A12;
+    --t:0.4s;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--negro);color:var(--blanco);font-family:'Crimson Pro',Georgia,serif;font-size:18px;line-height:1.6;overflow-x:hidden;min-height:100vh}
+  body::before{content:'';position:fixed;inset:0;background-image:repeating-linear-gradient(45deg,transparent,transparent 40px,rgba(15,82,186,0.04) 40px,rgba(15,82,186,0.04) 41px),repeating-linear-gradient(-45deg,transparent,transparent 40px,rgba(15,82,186,0.03) 40px,rgba(15,82,186,0.03) 41px);pointer-events:none;z-index:0}
+
+  /* PORTAL */
+  #portal{position:fixed;inset:0;z-index:1000;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(ellipse at 30% 40%,#0c2c6e 0%,var(--negro) 70%);padding:2rem;text-align:center;transition:opacity 0.8s,visibility 0.8s}
+  #portal.oculto{opacity:0;visibility:hidden;pointer-events:none}
+  .portal-pretitulo{font-family:'Space Mono',monospace;font-size:0.72rem;letter-spacing:0.25em;color:var(--zafiro-mid);text-transform:uppercase;margin-bottom:1.5rem;animation:fadeUp 1s ease 0.2s both}
+  .portal-titulo{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,6vw,4.5rem);font-weight:900;line-height:1.05;margin-bottom:0.5rem;animation:fadeUp 1s ease 0.4s both}
+  .portal-titulo span{color:var(--gold);font-style:italic}
+  .portal-subtitulo{font-size:1.1rem;color:var(--zafiro-pale);max-width:520px;margin:1rem auto 2.5rem;animation:fadeUp 1s ease 0.6s both;font-style:italic}
+  .portal-cuerpo{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin-bottom:2.5rem;animation:fadeUp 1s ease 0.8s both}
+  .organo-chip{display:flex;align-items:center;gap:0.5rem;padding:0.4rem 1rem;border-radius:2rem;border:1px solid rgba(255,255,255,0.12);font-size:0.9rem;background:rgba(255,255,255,0.04)}
+  .frase-portal{font-family:'Playfair Display',serif;font-style:italic;font-size:1rem;color:var(--zafiro-pale);max-width:480px;margin:0 auto 2.5rem;animation:fadeUp 1s ease 1s both;border-left:2px solid var(--gold);padding-left:1rem;text-align:left}
+  .btn-portal{display:inline-flex;align-items:center;gap:0.75rem;padding:1rem 2.5rem;background:var(--zafiro);color:var(--blanco);border:none;border-radius:0.25rem;font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:1000;cursor:pointer;transition:background var(--t),transform var(--t),box-shadow var(--t);animation:fadeUp 1s ease 1.1s both;letter-spacing:0.03em}
+  .btn-portal:hover{background:var(--zafiro-mid);transform:translateY(-2px);box-shadow:0 8px 32px rgba(15,82,186,0.45)}
+  .tiempo-nota{font-family:'Space Mono',monospace;font-size:0.75rem;color:var(--gris);margin-top:1rem;animation:fadeUp 1s ease 1.2s both}
+
+  /* LAYOUT */
+  #app{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:0 1.5rem 4rem}
+  .header{position:sticky;top:0;z-index:100;background:rgba(6,10,18,0.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(15,82,186,0.2);padding:0.75rem 1.5rem;display:flex;align-items:center;justify-content:space-between;margin:0 -1.5rem 3rem}
+  .header-logo{font-family:'Playfair Display',serif;font-weight:900;font-size:1rem;letter-spacing:0.04em}
+  .header-logo span{color:var(--gold)}
+  .progress-bar-wrap{flex:1;margin:0 1.5rem;height:3px;background:rgba(255,255,255,0.08);border-radius:2px;overflow:hidden}
+  .progress-bar-fill{height:100%;background:linear-gradient(90deg,var(--zafiro),var(--teal));border-radius:2px;transition:width 0.5s ease;width:0%}
+  .timer-display{font-family:'Space Mono',monospace;font-size:0.85rem;color:var(--gold);min-width:55px;text-align:right}
+
+  /* SECCIONES */
+  .seccion{margin-bottom:5rem;opacity:0;transform:translateY(30px);transition:opacity 0.7s ease,transform 0.7s ease}
+  .seccion.visible{opacity:1;transform:translateY(0)}
+  .mision-block{text-align:center;padding:3rem 0}
+  .label-seccion{font-family:'Space Mono',monospace;font-size:0.68rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--zafiro-mid);margin-bottom:1rem}
+  .titulo-seccion{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.2rem);font-weight:900;line-height:1.1;margin-bottom:1.5rem}
+  .titulo-seccion em{color:var(--gold);font-style:italic}
+  .descripcion{font-size:1.05rem;color:var(--zafiro-pale);max-width:620px;margin:0 auto;line-height:1.8}
+
+  /* VALORES */
+  .valores-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:rgba(15,82,186,0.15);border:1px solid rgba(15,82,186,0.2);margin-top:2.5rem}
+  .valor-item{padding:1.25rem 1.5rem;background:rgba(6,10,18,0.8);transition:background var(--t)}
+  .valor-item:hover{background:rgba(15,82,186,0.1)}
+  .valor-nombre{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:var(--gold);margin-bottom:0.25rem}
+  .valor-desc{font-size:0.88rem;color:var(--gris);font-style:italic}
+
+  /* PORQUES */
+  .porques-titulo{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;margin-bottom:0.5rem}
+  .porques-subtitulo{color:var(--zafiro-pale);font-style:italic;font-size:1rem;margin-bottom:2rem}
+  .porques-flow{display:flex;flex-direction:column;gap:0}
+  .porque-item{display:grid;grid-template-columns:3rem 1fr auto;gap:1.25rem;align-items:start;padding:1.5rem 0;border-bottom:1px solid rgba(15,82,186,0.12)}
+  .porque-num{font-family:'Space Mono',monospace;font-size:0.7rem;color:var(--zafiro-mid);padding-top:0.25rem}
+  .porque-frase{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:var(--blanco);line-height:1.3;margin-bottom:0.35rem}
+  .porque-diagnostico{font-size:0.88rem;color:var(--gris);font-style:italic}
+  .porque-organo{font-size:1.6rem;opacity:0.9}
+
+  /* PASIONES */
+  .pasiones-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem}
+  .pasion-card{padding:1.5rem;border:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02);border-radius:0.25rem;position:relative;overflow:hidden;transition:background var(--t)}
+  .pasion-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%}
+  .pasion-card:nth-child(1)::before{background:var(--gold)}
+  .pasion-card:nth-child(2)::before{background:var(--teal)}
+  .pasion-card:nth-child(3)::before{background:var(--rojo)}
+  .pasion-card:nth-child(4)::before{background:var(--zafiro-mid)}
+  .pasion-num{font-family:'Space Mono',monospace;font-size:0.65rem;letter-spacing:0.15em;color:var(--gris);margin-bottom:0.5rem;text-transform:uppercase}
+  .pasion-nombre{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;margin-bottom:0.6rem}
+  .pasion-desc{font-size:0.88rem;color:var(--zafiro-pale);line-height:1.65}
+  .pasion-momento{margin-top:0.75rem;font-family:'Space Mono',monospace;font-size:0.65rem;color:var(--gold);letter-spacing:0.1em;text-transform:uppercase}
+
+  /* ORGANOS */
+  .organos-intro{text-align:center;margin-bottom:2.5rem}
+  .organos-grid{display:flex;flex-direction:column;gap:1.5rem}
+  .organo-card{border:1px solid rgba(255,255,255,0.07);background:rgba(255,255,255,0.02);border-radius:0.25rem;overflow:hidden;cursor:pointer;transition:border-color var(--t),background var(--t)}
+  .organo-card:hover{border-color:rgba(255,255,255,0.18);background:rgba(255,255,255,0.04)}
+  .organo-card.expandido{border-color:var(--color-organo);background:rgba(255,255,255,0.03)}
+  .organo-header{display:flex;align-items:center;gap:1.25rem;padding:1.25rem 1.5rem}
+  .organo-emoji{font-size:2rem}
+  .organo-info{flex:1}
+  .organo-nombre{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;margin-bottom:0.2rem}
+  .organo-diagnostico{font-size:0.85rem;color:var(--gris);font-style:italic}
+  .organo-resultado{font-family:'Space Mono',monospace;font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;padding:0.3rem 0.75rem;border-radius:2rem;border:1px solid;white-space:nowrap}
+  .toggle-icon{font-size:1.2rem;transition:transform var(--t);color:var(--gris);margin-left:0.5rem}
+  .organo-card.expandido .toggle-icon{transform:rotate(180deg)}
+
+  /* MOMENTOS — 5 pasos en flujo vertical */
+  .momentos-wrap{display:none;padding:0 1.5rem 1.5rem;border-top:1px solid rgba(255,255,255,0.05)}
+  .organo-card.expandido .momentos-wrap{display:block}
+  .momentos-flow{display:flex;flex-direction:column;gap:0.6rem;margin-top:1.25rem}
+  .momento-paso{display:grid;grid-template-columns:7.5rem 1fr;border-radius:0.25rem;overflow:hidden}
+  .momento-etiqueta{display:flex;flex-direction:column;justify-content:center;padding:0.9rem 1rem;background:rgba(0,0,0,0.38);border-left:3px solid}
+  .momento-num{font-family:'Space Mono',monospace;font-size:0.56rem;letter-spacing:0.18em;text-transform:uppercase;opacity:0.55;margin-bottom:0.2rem}
+  .momento-nombre{font-family:'Playfair Display',serif;font-weight:700;font-size:0.82rem;line-height:1.2}
+  .momento-contenido{padding:0.9rem 1.25rem;background:rgba(255,255,255,0.02)}
+  .momento-titulo-contenido{font-family:'Space Mono',monospace;font-size:0.58rem;letter-spacing:0.15em;text-transform:uppercase;opacity:0.5;margin-bottom:0.3rem}
+  .momento-texto{font-size:0.92rem;color:var(--blanco);line-height:1.55}
+  .momento-texto em{color:var(--zafiro-pale);font-style:italic}
+  .frase-supuesto{font-family:'Playfair Display',serif;font-style:italic;font-size:0.96rem;color:var(--blanco)}
+  .sub-dato{display:inline-block;margin-top:0.4rem;font-family:'Space Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.2rem 0.65rem;border-radius:2rem;border:1px solid rgba(255,255,255,0.12);color:var(--gris)}
+  .sueno-label{font-family:'Space Mono',monospace;font-size:0.58rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--zafiro-mid);margin-top:0.6rem;margin-bottom:0.2rem}
+
+  /* colores específicos por momento */
+.m3{
+position:relative;
+transform:scale(1.02);
+z-index:2;
+}
+
+.m3 .momento-contenido{
+background:linear-gradient(
+135deg,
+rgba(255,215,0,0.12),
+rgba(255,215,0,0.04)
+);
+border-left:3px solid var(--gold);
+box-shadow:0 0 25px rgba(255,215,0,0.25);
+}
+
+.m3 .momento-etiqueta{
+background:rgba(255,215,0,0.08);
+}
+
+.m3::before{
+content:'PUNTO DE QUIEBRE';
+position:absolute;
+top:-10px;
+right:10px;
+font-family:'Space Mono',monospace;
+font-size:0.55rem;
+letter-spacing:0.2em;
+color:var(--gold);
+opacity:0.7;
+}
+
+.m4 .momento-contenido{background:rgba(78,205,196,0.04)}
+.m5 .momento-contenido{background:rgba(70,130,180,0.06)}
+
+  /* SECUENCIA */
+  .secuencia-wrap{display:flex;align-items:center;gap:0;flex-wrap:wrap;justify-content:center;margin:2rem 0}
+  .seq-item{display:flex;flex-direction:column;align-items:center;gap:0.5rem;padding:1rem 1.25rem;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);min-width:110px;text-align:center;position:relative}
+  .seq-item::after{content:'→';position:absolute;right:-0.75rem;top:50%;transform:translateY(-50%);color:var(--gris);font-size:0.85rem;z-index:1}
+  .seq-item:last-child::after{display:none}
+  .seq-emoji{font-size:1.6rem}
+  .seq-palabra{font-family:'Space Mono',monospace;font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold)}
+  .seq-organo{font-size:0.78rem;color:var(--gris);font-style:italic}
+
+  /* CIERRE */
+  .cierre-block{text-align:center;padding:3rem 1.5rem;border:1px solid rgba(15,82,186,0.25);background:radial-gradient(ellipse at 50% 0%,rgba(15,82,186,0.12) 0%,transparent 70%);border-radius:0.25rem;margin-top:2rem}
+  .frase-cierre{font-family:'Playfair Display',serif;font-size:clamp(1.3rem,3vw,2rem);font-weight:700;line-height:1.3;font-style:italic;margin-bottom:1.5rem}
+  .hashtags{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin-top:1.5rem}
+  .hashtag{font-family:'Space Mono',monospace;font-size:0.72rem;color:var(--zafiro-mid);letter-spacing:0.05em}
+  .firma{margin-top:2rem;font-size:0.9rem;color:var(--gris);font-style:italic}
+  .firma strong{color:var(--blanco);font-style:normal;font-family:'Playfair Display',serif}
+
+  .divider{display:flex;align-items:center;gap:1rem;margin:3rem 0;opacity:0.3}
+  .divider::before,.divider::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--zafiro-mid),transparent)}
+  .divider-sym{font-size:0.7rem;color:var(--zafiro-mid);letter-spacing:0.3em;font-family:'Space Mono',monospace}
+  .cita-alpha{display:block;font-family:'Playfair Display',serif;font-style:italic;font-size:1.1rem;color:var(--zafiro-pale);border-left:2px solid var(--gold);padding:0.75rem 1.25rem;margin:1.5rem 0;background:rgba(255,215,0,0.04)}
+
+  .nav-organos{display:flex;gap:0.5rem;flex-wrap:wrap;justify-content:center;margin-bottom:2rem;padding:0.75rem;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-radius:0.25rem}
+  .nav-btn{padding:0.4rem 0.9rem;border:1px solid rgba(255,255,255,0.1);background:transparent;color:var(--zafiro-pale);font-family:'Crimson Pro',serif;font-size:0.9rem;border-radius:2rem;cursor:pointer;transition:all var(--t)}
+  .nav-btn:hover{background:rgba(15,82,186,0.2);border-color:var(--zafiro-mid);color:var(--blanco)}
+
+  .scroll-top{position:fixed;bottom:2rem;right:2rem;width:42px;height:42px;border-radius:50%;background:var(--zafiro);border:none;color:white;font-size:1.2rem;cursor:pointer;z-index:200;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity var(--t);box-shadow:0 4px 16px rgba(15,82,186,0.5)}
+  .scroll-top.visible{opacity:1}
+.portal-whatsapp{
+display:inline-block;
+font-family:'Space Mono',monospace;
+font-size:0.78rem;
+background:rgba(37,211,102,0.12);
+border:1px solid rgba(37,211,102,0.3);
+padding:5px 18px;
+border-radius:30px;
+margin-bottom:1.2rem;
+animation:fadeUp 1s ease 0.3s both;
+letter-spacing:0.04em;
+}
+.portal-whatsapp a{
+color:#25D366;
+font-weight:700;
+text-decoration:none;
+}
+.portal-whatsapp a:hover{text-decoration:underline;}
+
+.copyright-footer{
+text-align:center;
+font-size:10px;
+color:rgba(176,196,222,0.5);
+border-top:1px solid rgba(15,82,186,0.25);
+padding-top:14px;
+margin-top:20px;
+line-height:1.8;
+padding-bottom:16px;
+font-family:'Space Mono',monospace;
+letter-spacing:0.03em;
+}
+.copyright-footer a{
+color:rgba(176,196,222,0.6);
+text-decoration:underline;
+text-underline-offset:2px;
+}
+.copyright-footer a:hover{color:var(--zafiro-pale);}
+
+.whatsapp-cta{
+display:inline-block;
+margin-top:1.2rem;
+padding:0.8rem 1.6rem;
+background:#25D366;
+color:#060A12;
+font-family:'Space Mono',monospace;
+font-size:1rem;
+letter-spacing:0.08em;
+text-decoration:none;
+border-radius:2rem;
+font-weight:700;
+box-shadow:0 0 18px rgba(37,211,102,0.5);
+transition:all 0.3s ease;
+}
+
+.whatsapp-cta:hover{
+transform:scale(1.08);
+box-shadow:0 0 30px rgba(37,211,102,0.8);
+background:#1ebe5d;
+}
+@keyframes whatsappPulse{
+0%{transform:scale(1);box-shadow:0 0 15px rgba(37,211,102,0.5)}
+50%{transform:scale(1.08);box-shadow:0 0 35px rgba(37,211,102,0.9)}
+100%{transform:scale(1);box-shadow:0 0 15px rgba(37,211,102,0.5)}
+}
+@keyframes logoFinalReveal{
+0%{opacity:0; transform:scale(0.8)}
+100%{opacity:1; transform:scale(1)}
+}
+
+.logo-alpha.cierre img{
+animation:logoFinalReveal 1.2s ease;
+}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes quiebreGlow{
+0%{box-shadow:0 0 0 rgba(255,215,0,0)}
+50%{box-shadow:0 0 35px rgba(255,215,0,0.4)}
+100%{box-shadow:0 0 15px rgba(255,215,0,0.25)}
+}
+
+@keyframes quiebrePulse{
+0%{transform:scale(1);filter:brightness(1)}
+40%{transform:scale(1.06);filter:brightness(1.4)}
+70%{transform:scale(1.02);filter:brightness(1.1)}
+100%{transform:scale(1.03);filter:brightness(1.2)}
+}
+
+@keyframes quiebreTexto{
+0%{opacity:0;transform:translateY(10px)}
+100%{opacity:1;transform:translateY(0)}
+}
+
+@keyframes flashQuiebre{
+0%{opacity:0}
+40%{opacity:1}
+100%{opacity:0}
+}
+
+.m3.activo{
+animation:quiebrePulse 1.6s ease forwards;
+}
+
+.m3.activo .momento-contenido{
+animation:quiebreGlow 1.6s ease;
+transform:scale(1.04);
+}
+
+.m3.activo .momento-texto{
+animation:quiebreTexto 1.2s ease;
+}
+
+.m3::after{
+content:'';
+position:absolute;
+inset:0;
+background:radial-gradient(circle at center, rgba(255,215,0,0.25), transparent 70%);
+opacity:0;
+pointer-events:none;
+}
+
+.m3.activo::after{
+animation:flashQuiebre 0.8s ease;
+}
+  @media(max-width:600px){.pasiones-grid,.valores-grid{grid-template-columns:1fr}.momento-paso{grid-template-columns:6rem 1fr}}
+
+/* =========================================================
+   PORTAL ALPHA — ESTÁNDAR PORTAL ALPHA GENÉRICO
+   ========================================================= */
+#portal{
+  position:fixed;inset:0;z-index:1000;overflow:auto;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:
+    radial-gradient(circle at 50% 34%,rgba(15,82,186,.28),transparent 28%),
+    radial-gradient(circle at 18% 78%,rgba(70,130,180,.10),transparent 25%),
+    #082567;
+  padding:4rem 1.25rem 5rem;text-align:center;
+  transition:opacity .8s ease,visibility .8s ease;
+  font-family:'Poppins',sans-serif;
+}
+#portal.oculto{opacity:0;visibility:hidden;pointer-events:none}
+.portal-shell{width:min(940px,100%);position:relative;z-index:2}
+.alpha-brand-header{
+  font-family:'Lora',serif;font-size:.72rem;font-weight:700;
+  letter-spacing:.32em;text-transform:uppercase;color:#F9F8FF;
+  margin-bottom:1.2rem;opacity:.92;
+}
+.alpha-logo-stage{
+  position:relative;width:220px;height:220px;margin:0 auto .2rem;
+  display:grid;place-items:center;
+}
+.activation-ring{
+  position:absolute;inset:0;width:220px;height:220px;transform:rotate(-90deg);
+}
+.activation-ring circle{fill:none;stroke-width:1.5}
+.ring-base{stroke:rgba(176,196,222,.13)}
+.ring-progress{
+  stroke:#4682B4;stroke-linecap:round;
+  stroke-dasharray:603;stroke-dashoffset:603;
+  animation:ringActivate 2.3s cubic-bezier(.22,.61,.36,1) forwards;
+  filter:drop-shadow(0 0 8px rgba(70,130,180,.65));
+}
+.portal-logo{position:relative;z-index:3;margin:0;animation:logoBirth 1.2s ease .35s both,logoBreathe 5s ease-in-out 2.5s infinite}
+.portal-logo img{
+  width:116px;max-width:52vw;opacity:1;
+  filter:drop-shadow(0 0 20px rgba(70,130,180,.45));
+}
+.compass{
+  position:absolute;right:5px;top:30px;width:38px;height:38px;
+  border:1px solid rgba(176,196,222,.38);border-radius:50%;
+  display:grid;place-items:center;z-index:4;
+  animation:compassAlign 1.7s ease-out .25s both;
+}
+.compass::before,.compass::after{
+  content:'';position:absolute;background:rgba(176,196,222,.25);
+}
+.compass::before{width:1px;height:28px}.compass::after{width:28px;height:1px}
+.compass-needle{font-size:.72rem;color:#F9F8FF;transform:rotate(-45deg)}
+.portal-whatsapp{
+  display:inline-block;font-family:'Poppins',sans-serif;font-size:.72rem;
+  background:rgba(15,82,186,.18);border:1px solid rgba(176,196,222,.22);
+  padding:5px 16px;border-radius:999px;margin-bottom:1.15rem;
+  animation:fadeUp .8s ease .5s both;letter-spacing:.03em;
+}
+.portal-whatsapp a{color:#B0C4DE;font-weight:600;text-decoration:none}
+.portal-whatsapp a:hover{color:#F9F8FF}
+.cinematic-narrative{
+  position:relative;min-height:2.2rem;max-width:650px;margin:0 auto 1.4rem;
+  font-family:'Lora',serif;font-size:1rem;font-style:italic;color:#B0C4DE;
+}
+.cinematic-narrative span{
+  position:absolute;inset:0;opacity:0;
+  animation:narrativeCycle 18s linear infinite;
+}
+.cinematic-narrative span:nth-child(1){animation-delay:0s}
+.cinematic-narrative span:nth-child(2){animation-delay:3s}
+.cinematic-narrative span:nth-child(3){animation-delay:6s}
+.cinematic-narrative span:nth-child(4){animation-delay:9s}
+.cinematic-narrative span:nth-child(5){animation-delay:12s}
+.cinematic-narrative span:nth-child(6){animation-delay:15s}
+.portal-pretitulo{
+  font-family:'Poppins',sans-serif;font-size:.65rem;letter-spacing:.22em;
+  color:#4682B4;text-transform:uppercase;margin-bottom:.7rem;
+  animation:fadeUp .8s ease .7s both;
+}
+.portal-titulo{
+  font-family:'Lora',serif;font-size:clamp(2.35rem,7vw,4.7rem);font-weight:700;
+  line-height:1.03;margin-bottom:.8rem;animation:fadeUp .9s ease .85s both;
+}
+.portal-titulo span{color:#B0C4DE;font-style:italic}
+.portal-subtitulo{
+  font-family:'Poppins',sans-serif;font-size:.95rem;font-weight:300;
+  color:#B0C4DE;max-width:720px;margin:0 auto 1.25rem;
+  line-height:1.75;font-style:italic;animation:fadeUp .9s ease 1s both;
+}
+.portal-badge{
+  display:inline-flex;align-items:center;justify-content:center;
+  padding:.38rem .85rem;border:1px solid rgba(70,130,180,.45);
+  border-radius:999px;color:#B0C4DE;background:rgba(15,82,186,.12);
+  font-family:'Poppins',sans-serif;font-size:.62rem;letter-spacing:.14em;
+  margin-bottom:1.5rem;animation:fadeUp .9s ease 1.1s both;
+}
+.portal-cards{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;
+  max-width:780px;margin:0 auto 1rem;text-align:left;
+}
+.portal-card{
+  padding:1.35rem 1.4rem;border:1px solid rgba(176,196,222,.13);
+  background:rgba(8,37,103,.36);backdrop-filter:blur(10px);
+  border-radius:1rem;animation:fadeUp .9s ease 1.2s both;
+}
+.portal-card:nth-child(2){animation-delay:1.3s}
+.portal-card-label{
+  font-family:'Poppins',sans-serif;font-size:.58rem;letter-spacing:.18em;
+  color:#4682B4;font-weight:600;margin-bottom:.45rem;
+}
+.portal-card h2{font-family:'Lora',serif;font-size:1.12rem;margin-bottom:.45rem;color:#F9F8FF}
+.portal-card p{font-size:.82rem;line-height:1.65;color:#B0C4DE}
+.portal-quote{
+  max-width:780px;margin:1rem auto 1.35rem;padding:.85rem 1.2rem;
+  border-left:2px solid #4682B4;background:rgba(70,130,180,.07);
+  color:#F9F8FF;font-family:'Lora',serif;font-style:italic;font-size:.92rem;
+  text-align:left;animation:fadeUp .9s ease 1.4s both;
+}
+.portal-pillars{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:.55rem;
+  max-width:780px;margin:0 auto 1.6rem;
+}
+.portal-pillar{
+  padding:.75rem .45rem;border:1px solid rgba(176,196,222,.10);
+  background:rgba(255,255,255,.025);border-radius:.8rem;
+  animation:fadeUp .8s ease both;
+}
+.portal-pillar:nth-child(1){animation-delay:1.45s}.portal-pillar:nth-child(2){animation-delay:1.52s}
+.portal-pillar:nth-child(3){animation-delay:1.59s}.portal-pillar:nth-child(4){animation-delay:1.66s}
+.portal-pillar:nth-child(5){animation-delay:1.73s}
+.portal-pillar span{display:block;font-size:1.25rem;margin-bottom:.22rem}
+.portal-pillar strong{display:block;font-family:'Lora',serif;font-size:.8rem;color:#F9F8FF}
+.portal-pillar small{display:block;font-size:.58rem;color:#B0C4DE;margin-top:.1rem}
+.btn-portal-alpha{
+  display:inline-flex;align-items:center;gap:1.4rem;padding:.85rem 1.2rem .85rem 1.55rem;
+  border:1px solid rgba(176,196,222,.48);border-radius:999px;
+  color:#F9F8FF;background:linear-gradient(135deg,rgba(15,82,186,.92),rgba(70,130,180,.52));
+  box-shadow:0 0 0 rgba(15,82,186,0),inset 0 1px rgba(255,255,255,.12);
+  backdrop-filter:blur(12px);font-family:'Poppins',sans-serif;font-size:.9rem;
+  font-weight:600;cursor:pointer;transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease;
+  animation:ctaPulse 3.5s ease-in-out 2s infinite;
+}
+.btn-portal-alpha b{
+  display:grid;place-items:center;width:30px;height:30px;border-radius:50%;
+  background:rgba(249,248,255,.12);font-size:1.1rem;font-weight:400;
+}
+.btn-portal-alpha:hover{transform:translateY(-3px);border-color:#B0C4DE;box-shadow:0 12px 34px rgba(15,82,186,.42)}
+.tiempo-nota{
+  font-family:'Poppins',sans-serif;font-size:.64rem;color:#B0C4DE;
+  margin-top:.8rem;letter-spacing:.05em;animation:fadeUp .8s ease 1.8s both;
+}
+.portal-access{font-family:'Poppins',sans-serif;font-size:.58rem;color:rgba(176,196,222,.58);margin-top:.35rem}
+.alpha-particles{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:1}
+.alpha-particle{
+  position:absolute;border-radius:50%;background:#B0C4DE;opacity:0;
+  animation:particleFloat linear infinite;
+}
+.portal-footer{
+  position:fixed;left:0;right:0;bottom:0;z-index:4;
+  display:flex;justify-content:center;gap:1.2rem;flex-wrap:wrap;
+  padding:.65rem 1rem;background:rgba(8,37,103,.78);
+  border-top:1px solid rgba(176,196,222,.12);backdrop-filter:blur(12px);
+  font-family:'Poppins',sans-serif;font-size:.58rem;color:rgba(176,196,222,.72);
+}
+.portal-footer a{color:#B0C4DE;text-decoration:none}
+.portal-footer a:hover{color:#F9F8FF}
+@keyframes ringActivate{to{stroke-dashoffset:0}}
+@keyframes logoBirth{
+  0%{opacity:0;transform:scale(.6);filter:blur(10px)}
+  70%{opacity:1;transform:scale(1.04);filter:blur(0)}
+  100%{opacity:1;transform:scale(1);filter:blur(0)}
+}
+@keyframes logoBreathe{0%,100%{transform:scale(1)}50%{transform:scale(1.035)}}
+@keyframes compassAlign{0%{transform:rotate(-120deg);opacity:0}70%{transform:rotate(15deg);opacity:1}100%{transform:rotate(0)}}
+@keyframes narrativeCycle{
+  0%,2%{opacity:0;transform:translateY(8px)}
+  5%,13%{opacity:1;transform:translateY(0)}
+  16.6%,100%{opacity:0;transform:translateY(-8px)}
+}
+@keyframes ctaPulse{
+  0%,100%{box-shadow:0 0 0 rgba(15,82,186,0),inset 0 1px rgba(255,255,255,.12)}
+  50%{box-shadow:0 0 28px rgba(15,82,186,.35),inset 0 1px rgba(255,255,255,.15)}
+}
+@keyframes particleFloat{
+  0%{transform:translate3d(0,20px,0);opacity:0}
+  15%{opacity:.35}70%{opacity:.12}
+  100%{transform:translate3d(18px,-120px,0);opacity:0}
+}
+@media(max-width:700px){
+  #portal{justify-content:flex-start;padding-top:2rem}
+  .alpha-brand-header{font-size:.62rem;letter-spacing:.22em}
+  .alpha-logo-stage{width:180px;height:180px}
+  .activation-ring{width:180px;height:180px}
+  .portal-logo img{width:95px}
+  .compass{right:-3px;top:18px}
+  .portal-cards{grid-template-columns:1fr}
+  .portal-pillars{grid-template-columns:repeat(5,minmax(52px,1fr));gap:.3rem}
+  .portal-pillar{padding:.55rem .2rem}
+  .portal-pillar strong{font-size:.66rem}
+  .portal-pillar small{font-size:.5rem}
+  .portal-footer{font-size:.52rem}
+}
+
+
+.portal-copyright{
+  position:fixed;left:0;right:0;bottom:0;z-index:3;
+  transform:translateY(100%);opacity:0;pointer-events:none;
+  text-align:center;font-family:'Space Mono',monospace;font-size:9px;
+  line-height:1.65;letter-spacing:.02em;color:rgba(176,196,222,.58);
+  padding:.55rem 1rem;background:rgba(6,10,18,.94);
+  border-top:1px solid rgba(15,82,186,.28);backdrop-filter:blur(10px);
+  transition:transform .35s ease,opacity .35s ease;
+}
+.portal-copyright a{color:rgba(176,196,222,.72);text-decoration:underline;text-underline-offset:2px}
+.portal-copyright a:hover{color:#F9F8FF}
+#portal.copyright-visible .portal-footer{opacity:0;pointer-events:none}
+#portal.copyright-visible .portal-copyright{transform:translateY(0);opacity:1;pointer-events:auto}
+.portal-copyright-toggle{
+  position:fixed;right:12px;bottom:50px;z-index:5;
+  border:1px solid rgba(176,196,222,.18);background:rgba(8,37,103,.68);
+  color:rgba(176,196,222,.7);border-radius:999px;padding:5px 9px;
+  font-family:'Space Mono',monospace;font-size:9px;cursor:pointer;
+}
+@media(max-width:700px){.portal-copyright{font-size:8px;padding:.45rem .7rem}.portal-copyright-toggle{bottom:48px}}
+
+</style>
+
+<style id="alpha-mission-protocol0">
+/* AJUSTES MISIÓN ALPHA */
+.apuestas-alpha{max-width:880px;margin:2.2rem auto 0;display:flex;flex-direction:column;gap:.75rem}
+.apuesta-alpha{display:grid;grid-template-columns:70px 1fr;gap:1.1rem;align-items:start;padding:1.35rem 1.5rem;border:1px solid rgba(176,196,222,.13);border-radius:1rem;background:linear-gradient(135deg,rgba(15,82,186,.09),rgba(255,255,255,.018));text-align:left;transition:.35s}
+.apuesta-alpha:hover{transform:translateY(-3px);border-color:rgba(70,130,180,.42);box-shadow:0 14px 34px rgba(0,0,0,.18)}
+.apuesta-num{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(70,130,180,.55);color:#B0C4DE;font-family:'Space Mono',monospace;font-size:.78rem;background:rgba(15,82,186,.15)}
+.apuesta-label{color:#4682B4;font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.18em;margin-bottom:.25rem;font-weight:700}
+.apuesta-contenido h3{font-family:'Playfair Display',serif;font-size:1.28rem;color:#F9F8FF;margin-bottom:.45rem}
+.apuesta-contenido p{color:#B0C4DE;font-size:.95rem;line-height:1.65}
+.apuesta-contenido strong{color:#F9F8FF}
+.apuesta-flecha{align-self:center;color:#4682B4;font-size:1.5rem;line-height:1;opacity:.7;margin:-.2rem 0}
+.apuesta-consecuencia{border-color:rgba(70,130,180,.34);background:linear-gradient(135deg,rgba(70,130,180,.13),rgba(15,82,186,.07))}
+.jugada-maestra{max-width:880px;margin:1.5rem auto 1.8rem;padding:1.25rem 1.4rem;border-left:3px solid #4682B4;border-radius:0 .8rem .8rem 0;background:rgba(70,130,180,.07);text-align:center}
+.jugada-maestra span{display:block;color:#4682B4;font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.2em;margin-bottom:.45rem}
+.jugada-maestra strong{display:block;font-family:'Playfair Display',serif;font-size:1.35rem;color:#F9F8FF;font-style:italic}
+.jugada-maestra p{margin-top:.5rem;color:#B0C4DE;font-size:.88rem}.jugada-maestra b{color:#F9F8FF}
+.valores-alpha{max-width:880px;margin:2.4rem auto 0}
+.valores-header{text-align:center;max-width:760px;margin:0 auto 1.35rem;padding-top:1.1rem;border-top:1px solid rgba(176,196,222,.12)}
+.valores-header .label-seccion{color:#4682B4;font-family:'Space Mono',monospace;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;margin-bottom:.55rem}
+.valores-header h3{font-family:'Playfair Display',serif;color:#F9F8FF;font-size:1.7rem;margin-bottom:.65rem}.valores-header h3 em{color:#B0C4DE}
+.valores-header p{color:#B0C4DE;font-size:.9rem;line-height:1.65;margin-bottom:.45rem}.valores-header strong{color:#F9F8FF}
+.valores-alpha .valores-grid{margin-top:1rem}
+.valores-cierre{margin:1.25rem auto 0;padding:1rem 1.25rem;border-left:2px solid #4682B4;background:rgba(70,130,180,.06);border-radius:0 .7rem .7rem 0;text-align:center}
+.valores-cierre strong{display:block;font-family:'Playfair Display',serif;color:#F9F8FF;font-size:1.05rem}.valores-cierre span{display:block;color:#B0C4DE;font-size:.78rem;margin-top:.25rem}
+
+/* PROTOCOLO 0 — doble presencia de autoría */
+.portal-copyright-toggle{display:inline-flex;align-items:center;justify-content:center;margin:1rem auto .4rem;padding:.48rem .85rem;border:1px solid rgba(176,196,222,.28);border-radius:999px;background:rgba(8,37,103,.34);color:#B0C4DE;font:600 .7rem 'Poppins',sans-serif;cursor:pointer}
+.portal-copyright-toggle:hover{border-color:#4682B4;color:#F9F8FF}
+.portal-copyright{display:none;max-width:720px;margin:.45rem auto 0;padding:.8rem 1rem;border:1px solid rgba(176,196,222,.16);border-radius:.7rem;background:rgba(8,37,103,.72);color:#B0C4DE;font:.72rem/1.55 'Poppins',sans-serif;text-align:center}
+.portal-copyright.is-visible{display:block}.portal-copyright a{color:#B0C4DE}
+@media(max-width:600px){.apuesta-alpha{grid-template-columns:48px 1fr;gap:.8rem;padding:1rem}.apuesta-num{width:42px;height:42px;font-size:.68rem}.apuesta-contenido h3{font-size:1.08rem}.apuesta-contenido p{font-size:.86rem}.jugada-maestra strong{font-size:1.08rem}.valores-header h3{font-size:1.4rem}}
+</style>
+
+
+<style id="alpha-mobile-fix">
+/* CORRECCIÓN MOBILE — PORTAL ALPHA */
+@media (max-width: 600px){
+  html,body{width:100%;max-width:100%;overflow-x:hidden}
+  #portal{
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100dvh;
+    min-height:100dvh;
+    box-sizing:border-box;
+    overflow-x:hidden;
+    overflow-y:auto;
+    display:flex;
+    align-items:center;
+    justify-content:flex-start;
+    padding:1rem .75rem 5.2rem;
+    -webkit-overflow-scrolling:touch;
+  }
+  .portal-shell{
+    width:100%;
+    max-width:430px;
+    box-sizing:border-box;
+    margin:0 auto;
+  }
+  .alpha-brand-header{
+    font-size:.58rem!important;
+    letter-spacing:.16em!important;
+    margin-bottom:.55rem!important;
+    white-space:nowrap;
+  }
+  .alpha-logo-stage{
+    width:142px!important;
+    height:142px!important;
+    margin:0 auto .25rem!important;
+  }
+  .activation-ring{width:142px!important;height:142px!important}
+  .compass{transform:scale(.72)}
+  .portal-logo img{
+    width:78px!important;
+    max-width:78px!important;
+  }
+  .portal-whatsapp{
+    font-size:.58rem!important;
+    margin-bottom:.45rem!important;
+  }
+  .cinematic-narrative{
+    min-height:2.2rem!important;
+    margin:.25rem auto .55rem!important;
+    font-size:.7rem!important;
+    line-height:1.35!important;
+    max-width:360px!important;
+  }
+  .portal-pretitulo{
+    font-size:.56rem!important;
+    letter-spacing:.12em!important;
+    margin:.35rem 0!important;
+  }
+  .portal-titulo{
+    font-size:clamp(2rem,11vw,2.8rem)!important;
+    line-height:.98!important;
+    margin:.2rem 0 .55rem!important;
+  }
+  .portal-subtitulo{
+    font-size:.76rem!important;
+    line-height:1.45!important;
+    max-width:370px!important;
+    margin:0 auto .65rem!important;
+  }
+  .portal-badge{
+    font-size:.5rem!important;
+    padding:.3rem .55rem!important;
+    margin-bottom:.7rem!important;
+  }
+  .portal-cards{
+    grid-template-columns:1fr!important;
+    gap:.55rem!important;
+    margin-bottom:.7rem!important;
+  }
+  .portal-card{
+    padding:.75rem .85rem!important;
+  }
+  .portal-card-label{font-size:.52rem!important}
+  .portal-card h2{font-size:.9rem!important;line-height:1.15!important}
+  .portal-card p{font-size:.68rem!important;line-height:1.42!important}
+  .portal-quote{
+    font-size:.72rem!important;
+    line-height:1.4!important;
+    margin:.65rem auto .75rem!important;
+    max-width:380px!important;
+  }
+  .portal-pillars{
+    width:100%!important;
+    max-width:390px!important;
+    grid-template-columns:repeat(5,minmax(0,1fr))!important;
+    gap:.25rem!important;
+    margin:0 auto .8rem!important;
+  }
+  .portal-pillar{
+    min-width:0!important;
+    padding:.45rem .15rem!important;
+    border-radius:.55rem!important;
+  }
+  .portal-pillar span{font-size:1rem!important}
+  .portal-pillar strong{font-size:.52rem!important;line-height:1.05!important}
+  .portal-pillar small{font-size:.43rem!important;line-height:1!important}
+  .btn-portal-alpha{
+    min-height:46px!important;
+    padding:.7rem 1rem!important;
+    gap:1rem!important;
+    font-size:.78rem!important;
+    margin-bottom:.35rem!important;
+  }
+  .tiempo-nota{
+    font-size:.55rem!important;
+    line-height:1.35!important;
+    margin:.2rem auto!important;
+  }
+  .portal-access{
+    font-size:.5rem!important;
+    line-height:1.3!important;
+    margin:.3rem auto .55rem!important;
+  }
+  .portal-footer{
+    position:fixed!important;
+    left:0!important;right:0!important;bottom:0!important;
+    padding:.38rem .45rem!important;
+    min-height:34px!important;
+    box-sizing:border-box!important;
+    font-size:.43rem!important;
+    gap:.4rem!important;
+  }
+  .portal-copyright-toggle{
+    position:fixed!important;
+    right:8px!important;
+    bottom:43px!important;
+    z-index:20!important;
+    font-size:8px!important;
+    padding:4px 7px!important;
+  }
+  .portal-copyright{
+    position:fixed!important;
+    left:8px!important;
+    right:8px!important;
+    bottom:42px!important;
+    z-index:19!important;
+    max-width:none!important;
+    margin:0!important;
+    padding:.65rem .7rem!important;
+    box-sizing:border-box!important;
+    font-size:.57rem!important;
+    line-height:1.4!important;
+  }
+}
+@media (max-width:360px){
+  #portal{padding-left:.55rem;padding-right:.55rem}
+  .alpha-logo-stage{width:124px!important;height:124px!important}
+  .activation-ring{width:124px!important;height:124px!important}
+  .portal-logo img{width:68px!important}
+  .portal-titulo{font-size:1.85rem!important}
+  .portal-card p{font-size:.63rem!important}
+  .portal-pillar{padding:.35rem .08rem!important}
+  .portal-pillar span{font-size:.9rem!important}
+  .portal-pillar strong{font-size:.46rem!important}
+  .portal-pillar small{font-size:.39rem!important}
+}
+</style>
+
+
+<style id="alpha-copyright-final-fix">
+.portal-copyright-toggle{
+  z-index:10001!important;
+  display:inline-flex!important;
+  visibility:visible!important;
+  opacity:1!important;
+}
+.portal-copyright{
+  z-index:10000!important;
+}
+@media(max-width:600px){
+  .portal-copyright-toggle{
+    right:8px!important;
+    bottom:44px!important;
+  }
+  .portal-copyright{
+    left:8px!important;
+    right:8px!important;
+    bottom:42px!important;
+    z-index:10000!important;
+  }
+}
+</style>
+</head>
+<body>
+
+
+<div id="portal" aria-label="Portal de entrada ALPHA">
+  <div class="alpha-particles" id="alphaParticles" aria-hidden="true"></div>
+
+  <div class="portal-shell">
+    <header class="alpha-brand-header">EL ARTEZANO DE LA POLÍTICA</header>
+
+    <div class="alpha-logo-stage" aria-label="Activación territorial ALPHA">
+      <svg class="activation-ring" viewBox="0 0 220 220" aria-hidden="true">
+        <circle class="ring-base" cx="110" cy="110" r="96"></circle>
+        <circle class="ring-progress" cx="110" cy="110" r="96"></circle>
+      </svg>
+
+      <div class="compass" aria-hidden="true">
+        <span class="compass-needle">◆</span>
+      </div>
+
+      <div class="logo-alpha portal-logo">
+        <img src="https://i.imgur.com/twSFmew.png" alt="ALPHAS Consulting">
+      </div>
+    </div>
+
+    <div class="portal-whatsapp">📱 WhatsApp <a href="https://wa.me/573193864348" target="_blank" rel="noopener noreferrer">3193864348</a></div>
+
+    <div class="cinematic-narrative" aria-live="polite">
+      <span>Un territorio puede enfermar.</span>
+      <span>También puede reconocer sus heridas.</span>
+      <span>Puede volver a sentir.</span>
+      <span>Puede encontrar un propósito compartido.</span>
+      <span>Puede organizarse.</span>
+      <span>Y construir lo que perdura y trasciende.</span>
+    </div>
+
+    <p class="portal-pretitulo">Sistema ALPHA · «La Jugada Maestra»</p>
+
+    <h1 class="portal-titulo">Sistema Operativo<br>Vivo <span>ALPHA</span></h1>
+
+    <p class="portal-subtitulo">«Un territorio despierta cuando se reconoce, encuentra su propósito, vuelve a sentir, se organiza y construye lo que perdura y trasciende.»</p>
+
+    <div class="portal-badge">PROYECTO TERRITORIAL · 2027</div>
+
+    <div class="portal-cards">
+      <article class="portal-card">
+        <div class="portal-card-label">QUÉ ES</div>
+        <h2> Leer el territorio es recorrer un cuerpo vivo:</h2>
+        <p> Una experiencia pedagógica que atraviesa cinco órganos en cuidados intensivos: el Corazón, la Cabeza, el Sistema Nervioso, la Sangre y el Esqueleto.</p>
+      </article>
+
+      <article class="portal-card">
+        <div class="portal-card-label">CÓMO FUNCIONA</div>
+        <h2>Cinco órganos · cinco momentos</h2>
+        <p>La herida, la excavación, el reconocimiento, el despertar y la acción ALPHA construyen una secuencia de sanación.</p>
+      </article>
+    </div>
+
+    <blockquote class="portal-quote">«La política debe ser herramienta para transformar la vida de la gente, nunca una herramienta para transar con ella.»</blockquote>
+
+    <div class="portal-pillars">
+      <div class="portal-pillar"><span>❤️</span><strong>Identidad</strong><small>Corazón</small></div>
+      <div class="portal-pillar"><span>🧠</span><strong>Propósito</strong><small>Cabeza</small></div>
+      <div class="portal-pillar"><span>⚡</span><strong>Sentir</strong><small>Nervioso</small></div>
+      <div class="portal-pillar"><span>🩸</span><strong>Organización</strong><small>Sangre</small></div>
+      <div class="portal-pillar"><span>🦴</span><strong>Estructura</strong><small>Esqueleto</small></div>
+    </div>
+
+    <button class="btn-portal-alpha" onclick="iniciarExperiencia()" type="button">
+      <span>Entrar a la experiencia</span><b>→</b>
+    </button>
+    <p class="tiempo-nota">⏱ Experiencia guiada · 9 minutos · cinco órganos · cinco momentos</p>
+    <p class="portal-access">Acceso a la experiencia guiada del Sistema Operativo Vivo ALPHA.</p>
+  </div>
+
+  <button class="portal-copyright-toggle" type="button" onclick="togglePortalCopyright()" aria-label="Ver derechos de autor">© Derechos de autor</button>
+
+  <div class="portal-footer">
+    <span>ALPHAS Consulting · El ArtEZano De La Política</span>
+    <span><a href="https://wa.me/573193864348" target="_blank" rel="noopener noreferrer">WhatsApp 3193864348</a></span>
+  </div>
+
+  <div class="portal-copyright">
+    © 2026 Esteban Zambrano. Esta app está protegida por derechos de autor.<br>
+    Licenciada bajo <a href="https://creativecommons.org/licenses/by-nd/4.0/" target="_blank" rel="noopener noreferrer">CC BY-ND 4.0</a>.<br>
+    No se permite modificar ni eliminar este aviso ni el logotipo original.
+  </div>
+</div>
+
+
+<div id="app" style="display:none;">
+  <div class="header">
+    <div class="header-logo">SOVA<span>·</span>ALPHA</div>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" id="progressBar"></div></div>
+    <div class="timer-display" id="timerDisplay">7:00</div>
+  </div>
+
+  <!-- S1 RAIZ -->
+  <section class="seccion" id="s-raiz">
+  <div class="mision-block">
+    <p class="label-seccion">🌱 Raíz · Misión ALPHA</p>
+    <h2 class="titulo-seccion">¿Por qué nos metimos<br>al mundo de <em>la política</em>?</h2>
+    <p class="descripcion">No nos metimos en política simplemente para ganar elecciones. Nos metimos porque creemos que la política puede volver a ser una herramienta para transformar la vida de la gente y construir territorios que perduren y trasciendan.</p>
+  </div>
+
+  <div class="apuestas-alpha">
+    <div class="apuesta-alpha">
+      <div class="apuesta-num">01</div>
+      <div class="apuesta-contenido">
+        <div class="apuesta-label">FORMAR</div>
+        <h3>Formar líderes y dirigentes</h3>
+        <p>Formar líderes y dirigentes alrededor de una <strong>«Cultura Organizacional de Crecimiento Deliberado ALPHA»</strong>, capaces de liderar, organizar y gobernar con propósito, integridad y visión de largo plazo.</p>
+      </div>
+    </div>
+    <div class="apuesta-flecha">↓</div>
+    <div class="apuesta-alpha">
+      <div class="apuesta-num">02</div>
+      <div class="apuesta-contenido">
+        <div class="apuesta-label">DESPERTAR</div>
+        <h3>Crear consciencia ciudadana</h3>
+        <p>Crear <strong>consciencia ciudadana, sentido de pertenencia e identidad territorial</strong>, para que las comunidades dejen de ser espectadoras y se conviertan en protagonistas de la transformación.</p>
+      </div>
+    </div>
+    <div class="apuesta-flecha">↓</div>
+    <div class="apuesta-alpha apuesta-consecuencia">
+      <div class="apuesta-num">03</div>
+      <div class="apuesta-contenido">
+        <div class="apuesta-label">CONSECUENCIA</div>
+        <h3>Convertir la transformación en resultado electoral</h3>
+        <p>Convertir las dos primeras apuestas en una fuerza electoral capaz de ganar elecciones. <strong>Los votos no son el punto de partida: son la consecuencia.</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="jugada-maestra">
+    <span>LA JUGADA MAESTRA</span>
+    <strong>Primero formamos. Después despertamos. Como consecuencia, ganamos.</strong>
+    <p>No perseguimos votos. <b>Construimos las condiciones para que los votos lleguen.</b></p>
+  </div>
+
+  <div class="valores-alpha">
+    <div class="valores-header">
+      <p class="label-seccion">Los 4 valores que atraviesan todo</p>
+      <h3>Una forma diferente de <em>hacer política</em></h3>
+      <p>Las tres grandes apuestas de ALPHA no pueden sostenerse solamente con metodología, estrategia o estructura. Necesitan una forma diferente de hacer política.</p>
+      <p>Por eso existen cuatro valores que <strong>atraviesan todo lo que hacemos</strong>: cómo formamos líderes, cómo nos relacionamos con la ciudadanía, cómo entendemos el territorio y cómo convertimos nuestras acciones en transformación.</p>
+    </div>
+    <div class="valores-grid">
+      <div class="valor-item"><div class="valor-nombre">❤️ Amor</div><div class="valor-desc">Reconocer y comprender el dolor real de las personas.</div></div>
+      <div class="valor-item"><div class="valor-nombre">🤲 Misericordia</div><div class="valor-desc">Sentir el dolor del <strong>TERRITORIO VIVO</strong> como propio y buscar aliviarlo de manera sostenible desde nuestras posibilidades.</div></div>
+      <div class="valor-item"><div class="valor-nombre">⚖️ Integridad que duela</div><div class="valor-desc">No la integridad que cuesta poco, sino la que exige algo de nosotros.</div></div>
+      <div class="valor-item"><div class="valor-nombre">🎯 Acciones con sentido</div><div class="valor-desc">Tácticas que dejan huella, transforman y producen propósito; no simplemente actividad.</div></div>
+    </div>
+    <blockquote class="valores-cierre">
+      <strong>No son cuatro valores escritos en una pared.</strong>
+      <span>Son cuatro maneras de estar, decidir y actuar en política.</span>
+    </blockquote>
+  </div>
+</section>
+
+  <div class="divider"><span class="divider-sym">· · ·</span></div>
+
+  <!-- S2 PORQUES -->
+  <section class="seccion" id="s-porques">
+    <p class="label-seccion">🔍 Los 5 Porqués de nuestra génesis política: el origen que nos define.</p>
+    <h2 class="porques-titulo">La raíz del problema<br>no es la corrupción.</h2>
+    <p class="porques-subtitulo">La corrupción, el cinismo, la desconfianza son síntomas. Los «Porqués» que nos llevan a los supuestos invisibles que generan los comportamientos.</p>
+    <div class="porques-flow">
+      <div class="porque-item"><div class="porque-num">POR QUÉ 01</div><div><div class="porque-frase">«Nuestro silencio termina siendo gasolina para que otros sigan robando lo que pertenece a todos»</div><div class="porque-diagnostico">Diagnóstico → Falta de identidad transformadora</div></div><div class="porque-organo">❤️</div></div>
+      <div class="porque-item"><div class="porque-num">POR QUÉ 02</div><div><div class="porque-frase">«Nuestros sueños merecen líderes capaces de estar a su altura»</div><div class="porque-diagnostico">Diagnóstico → Falta de propósito compartido</div></div><div class="porque-organo">🧠</div></div>
+      <div class="porque-item"><div class="porque-num">POR QUÉ 03</div><div><div class="porque-frase">«Normalizar la corrupción es renunciar a la ciudad que merecemos»</div><div class="porque-diagnostico">Diagnóstico → Ausencia de indignación constructiva</div></div><div class="porque-organo">⚡</div></div>
+      <div class="porque-item"><div class="porque-num">POR QUÉ 04</div><div><div class="porque-frase">«La transformación real comienza cuando nos organizamos y comprendemos nuestro territorio»</div><div class="porque-diagnostico">Diagnóstico → Tejido social fracturado</div></div><div class="porque-organo">🩸</div></div>
+      <div class="porque-item"><div class="porque-num">POR QUÉ 05</div><div><div class="porque-frase">«La política debe ser herramienta para transformar la vida de la gente, nunca una herramienta para transar con ella»</div><div class="porque-diagnostico">Diagnóstico → Acciones aisladas, no sistémicas</div></div><div class="porque-organo">🦴</div></div>
+    </div>
+  </section>
+
+  <div class="divider"><span class="divider-sym">· · ·</span></div>
+
+  <!-- S3 PASIONES -->
+  <section class="seccion" id="s-pasiones">
+    <p class="label-seccion">🔥 Las 4 Pasiones Maestras</p>
+    <h2 class="titulo-seccion" style="margin-bottom:0.5rem;">El proceso de sanación</h2>
+    <p class="descripcion" style="margin-bottom:2rem;">Cada órgano enfermo se sana recorriendo exactamente los mismos 5 momentos. Las Pasiones son el <em>cómo</em> de la transformación.</p>
+    <div class="pasiones-grid">
+      <div class="pasion-card"><div class="pasion-num">Pasión 1 · M1 + M2</div><div class="pasion-nombre">Curiosidad que atraviesa lo superficial</div><div class="pasion-desc">Pregunta «¿Por qué?» cinco veces hasta tocar la raíz. La corrupción no es el problema real: es el síntoma de supuestos invisibles.</div><div class="pasion-momento">→ M1 La Herida + M2 La Excavación</div></div>
+      <div class="pasion-card"><div class="pasion-num">Pasión 2 · M3</div><div class="pasion-nombre">Transformación desde lo profundo</div><div class="pasion-desc">La verdadera transformación exige cuestionar, revisar y modificar los supuestos básicos. No se trata de pintar paredes agrietadas, sino de reconstruir los cimientos.</div><div class="pasion-momento">→ M3 El Reconocimiento · Supuesto Básico</div></div>
+      <div class="pasion-card"><div class="pasion-num">Pasión 3 · M4</div><div class="pasion-nombre">Despertar consciencias dormidas</div><div class="pasion-desc">La transformación ocurre cuando una persona ve y siente lo que antes no veía ni sentía. No en los discursos — en la experiencia directa.</div><div class="pasion-momento">→ M4 El Despertar · Nueva Verdad</div></div>
+      <div class="pasion-card"><div class="pasion-num">Pasión 4 · M5</div><div class="pasion-nombre">Tejer sueños en el territorio</div><div class="pasion-desc">Los sueños simples y profundos: que la vida de las personas tenga valor real, que la justicia haga lo correcto, sin importar apellidos ni cuentas bancarias, que ningún niño crezca con la ausencia de un padre por culpa de la violencia.</div><div class="pasion-momento">→ M5 La Semilla · La Acción ALPHA</div></div>
+    </div>
+  </section>
+
+  <div class="divider"><span class="divider-sym">· · ·</span></div>
+
+  <!-- S4 ORGANOS -->
+  <section class="seccion" id="s-organos">
+    <div class="organos-intro">
+      <p class="label-seccion">🫀 El Cuerpo de «Esperanzía»</p>
+      <h2 class="titulo-seccion">Los 5 Órganos<br>que <em>sanan</em> el territorio</h2>
+      <p class="descripcion" style="margin-bottom:1.5rem;">Toca cada órgano para recorrer sus 5 momentos: la herida, la excavación, el supuesto básico, la nueva verdad y la acción ALPHA.</p>
+    </div>
+    <div class="nav-organos">
+      <button class="nav-btn" onclick="expandirOrgano('c1')">❤️ Corazón</button>
+      <button class="nav-btn" onclick="expandirOrgano('c2')">🧠 Cabeza</button>
+      <button class="nav-btn" onclick="expandirOrgano('c3')">⚡ Nervioso</button>
+      <button class="nav-btn" onclick="expandirOrgano('c4')">🩸 Sangre</button>
+      <button class="nav-btn" onclick="expandirOrgano('c5')">🦴 Esqueleto</button>
+    </div>
+    <div class="organos-grid">
+
+      <!-- CORAZON -->
+      <div class="organo-card" id="c1" style="--color-organo:#FF6B6B" onclick="toggleOrgano('c1')">
+        <div class="organo-header">
+          <div class="organo-emoji">❤️</div>
+          <div class="organo-info"><div class="organo-nombre" style="color:#FF6B6B">Corazón con latido muy débil</div><div class="organo-diagnostico">Falta de identidad transformadora</div></div>
+          <div class="organo-resultado" style="color:#FF6B6B;border-color:#FF6B6B">Identidad que moviliza</div>
+          <div class="toggle-icon">▾</div>
+        </div>
+        <div class="momentos-wrap">
+          <div class="momentos-flow">
+            <div class="momento-paso m1"><div class="momento-etiqueta" style="border-color:#FF6B6B"><div class="momento-num">M1</div><div class="momento-nombre">La Herida</div></div><div class="momento-contenido"><div class="momento-titulo-contenido">El órgano enfermo</div><div class="momento-texto">EJERCICIO DEL ESPEJO: Párate frente a un espejo real, Mírate a los ojos, Di en VOZ ALTA: Yo, [tu nombre], he guardado silencio frente a injusticias porque me convenía. Mi silencio fue gasolina para que siguieran robándonos.</div></div></div>
+            <div class="momento-paso m2"><div class="momento-etiqueta" style="border-color:#FF6B6B88"><div class="momento-num">M2</div><div class="momento-nombre">La Excavación</div></div><div class="momento-contenido"><div class="momento-titulo-contenido">Pasión 1 · La pregunta raíz</div><div class="momento-texto">¿Por qué casi nadie tiene sentido de pertenencia con lo público?</div></div></div>
+            <div class="momento-paso m3"><div class="momento-etiqueta" style="border-color:#FFD700"><div class="momento-num">M3</div><div class="momento-nombre">El Reconocimiento</div></div><div class="momento-contenido"><div class="momento-titulo-contenido">Pasión 2 · Supuesto Básico</div><div class="momento-texto frase-supuesto">«Lo público no me pertenece; pertenece a un poder ajeno que decide por mí»</div><div class="sub-dato">Efecto: Desconexión resignada</div></div></div>
+            <div class="momento-paso m4"><div class="momento-etiqueta" style="border-color:#4ECDC4"><div class="momento-num">M4</div><div class="momento-nombre">El Despertar</div></div><div class="momento-contenido"><div class="momento-titulo-contenido">Pasión 3 · Nueva Verdad</div><div class="momento-texto">Callar o desconectarnos nos apaga; hablar y actuar nos mantiene vivos.</div></div></div>
+            <div class="momento-paso m5"><div class="momento-etiqueta" style="border-color:#4682B4"><div class="momento-num">M5</div><div class="momento-nombre">La Acción ALPHA</div></div><div class="momento-contenido"><div class="momento-titulo-contenido">Pasión 4 · La Semilla</div><div class="momento-texto">Rituales de identidad: ¿Quién nos importa? ¿Qué nos importa? ¿Para qué hacemos política?</div><div class="sueno-label">Sueño</div><div class="momento-texto"><em>Territorio con IDENTIDAD QUE MOVILIZA</em></div></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CABEZA -->
+      <div class="organo-card" id="c2" style="--color-organo:#4ECDC4" onclick="toggleOrgano('c2')">
+        <div class="organo-header">
+          <div class="organo-emoji">🧠</div>
+          <div class="organo-info"><div class="organo-nombre" style="color:#4ECDC4">Cabeza sin rumbo</div><div class="organo-diagnostico">Falta de propósito compartido</div></div>
+          <div class="organo-resultado" style="color:#4ECDC4;border-color:#4ECDC4">Propósito compartido</div>
+          <div class="toggle-icon">▾</div>
+        </div>
+        <div class="momentos-wrap">
+          <div class="momentos-flow">
+            <div class="momento-paso m1"><div class="momento-etiqueta" style="border-color:#4ECDC4"><div class="momento-num">M1</div><div class="momento-nombre">La Herida</div></div><div class="momento-contenido"><div class="momento-titulo-contenido">El órgano enfermo</div><div class="momento-texto">EJERCICIO DE IMAGINACIÓN POLÍTICA: Toma lápiz y papel. En 1 minuto, escribe: Mi sueño para mi barrio/vereda/municipio en 5 años es...</div></div></div>
+            <div class="momento-paso m2"><div class="momento-etiqueta" style="border-color:#4ECDC488"><div class="momento-num">M2</div><div class="momento-nombre">La Excavación</div></div><div class="momento-contenido"><div class="momento-titulo-contenido">Pasión 1 · La pregunta raíz</div><div class="momento-texto">¿Por qué es un problema elegir «el menos malo»?</div></div></div>
+            <div class="momento-paso m3"><div class="momento-etiqueta" style="border-color:#FFD700"><div class="momento-num">M3</div><div class="momento-nombre">El Reconocimiento</div></div><div class="momento-contenido"><div class="momento-titulo-contenido">Pasión 2 · Supuesto Básico</div><div class="momento-texto frase-supuesto">«La política no es el espacio para soñar, sino para administrar riesgos»</div><div class="sub-dato">Efecto: Soñar en grande es utopía</div></div></div>
+            <div class="momento-paso m4"><div class="momento-etiqueta" style="border-color:#4ECDC4"><div class="momento-num">M4</div><div class="momento-nombre">El Despertar</div></div><div class="momento-contenido"><div class="momento-titulo-contenido">Pasión 3 · Nueva Verdad</div><div class="momento-texto">Soñar juntos un futuro mejor no es ingenuo: es el primer acto de liderazgo.</div></div></div>
+            <div class="momento-paso m5"><div class="momento-etiqueta" style="border-color:#4682B4"><div class="momento-num">M5</div><div class="momento-nombre">La Acción ALPHA</div></div><div class="momento-contenido"><div class="momento-titulo-contenido">Pasión 4 · La Semilla</div><div class="momento-texto">El propósito compartido es nuestra cabeza colectiva: nuestros sueños conectan a la gente para construir «Esperanzía».</div><div class="sueno-label">Sueño</div><div class="momento-texto"><em>Territorio con PROPÓSITO COMPARTIDO.</em></div></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- NERVIOSO -->
+      <div class="organo-card" id="c3" style="--color-organo:#FFD700" onclick="toggleOrgano('c3')">
+        <div class="organo-header">
+          <div class="organo-emoji">⚡</div>
+          <div class="organo-info"><div class="organo-nombre" style="color:#FFD700">Sistema Nervioso adormecido</div><div class="organo-diagnostico">Ausencia de indignación constructiva</div></div>
+          <div class="organo-resultado" style="color:#FFD700;border-color:#FFD700">Siente el daño</div>
+          <div class="toggle-icon">▾</div>
+        </div>
+        <div class="momentos-wrap">
+          <div class="momentos-flow">
+            <div class="momento-paso m1"><div class="momento-etiqueta" style="border-color:#FFD700"><div class="momento-num">M1</div><div class="momento-nombre">La Herida</div></div><div class="momento-contenido"><div class="momento-titulo-contenido">El órgano enfermo</div><div class="momento-texto">PAUSA AQUÍ. Antes de continuar: Cierra los ojos 30 segundos. Recuerda la última vez que sentiste rabia por corrupción ¿Qué hiciste? ¿Qué sentiste en una palabra? ¿Ese sentimiento te movió a ACTUAR o solo a sufrir?</div></div></div>
+            <div class="momento-paso m2"><div class="momento-etiqueta" style="border-color:#FFD70088"><div class="momento-num">M2</div><div class="momento-nombre">La Excavación</div></div><div class="momento-contenido"><div class="momento-titulo-contenido">Pasión 1 · La pregunta raíz</div><div class="momento-texto">¿Por qué la gente tolera prácticas corruptas en el territorio?</div></div></div>
+            <div class="momento-paso m3"><div class="momento-etiqueta" style="border-color:#FFD700"><div class="momento-num">M3</div><div class="momento-nombre">El Reconocimiento</div></div><div class="momento-contenido"><div class="momento-titulo-contenido">Pasión 2 · Supuesto Básico</div><div class="momento-texto frase-supuesto">«Mejor que no me duela, evito problemas»</div><div class="sub-dato">Efecto: Frustración anticipada · Anestesia social</div></div></div>
+            <div class="momento-paso m4"><div class="momento-etiqueta" style="border-color:#4ECDC4"><div class="momento-num">M4</div><div class="momento-nombre">El Despertar</div></div><div class="momento-contenido"><div class="momento-titulo-contenido">Pasión 3 · Nueva Verdad</div><div class="momento-texto">Si no duele ni siento nada cuando nos roban, algo nos anestesiaron.</div></div></div>
+            <div class="momento-paso m5"><div class="momento-etiqueta" style="border-color:#4682B4"><div class="momento-num">M5</div><div class="momento-nombre">La Acción ALPHA</div></div><div class="momento-contenido"><div class="momento-titulo-contenido">Pasión 4 · La Semilla</div><div class="momento-texto">Escucha activa + Narrativas Participativas + Voz Transparente y Auténtica: tres hilos que tejen el despertar de nuestra indignación constructiva.</div><div class="sueno-label">Sueño</div><div class="momento-texto"><em>Territorio SIENTE EL DAÑO.</em></div></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SANGRE -->
+      <div class="organo-card" id="c4" style="--color-organo:#E8575A" onclick="toggleOrgano('c4')">
+        <div class="organo-header">
+          <div class="organo-emoji">🩸</div>
+          <div class="organo-info"><div class="organo-nombre" style="color:#E8575A">Sangre desconectada y contaminada</div><div class="organo-diagnostico">Tejido social fracturado</div></div>
+          <div class="organo-resultado" style="color:#E8575A;border-color:#E8575A">Tejido vivo</div>
+          <div class="toggle-icon">▾</div>
+        </div>
+        <div class="momentos-wrap">
+          <div class="momentos-flow">
+            <div class="momento-paso m1"><div class="momento-etiqueta" style="border-color:#E8575A"><div class="momento-num">M1</div><div class="momento-nombre">La Herida</div></div><div class="momento-contenido"><div class="momento-titulo-contenido">El órgano enfermo</div><div class="momento-texto"> MAPEO DE TU RED: Dibuja un diagrama: 1. En el centro, escribe tu nombre 2. Alrededor, escribe nombres de: - 3 personas con las que harías una protesta - 3 personas con las que organizarías una asamblea - 3 personas con las que exigirías rendición de cuentas Ahora cuenta: - Si tienes 9 nombres diferentes: Tu sangre circula bien. -Si repetiste nombres: Tu red es pequeña pero fuerte. - Si no completaste 9: Tu sangre está desconectada.</div></div></div>
+            <div class="momento-paso m2"><div class="momento-etiqueta" style="border-color:#E8575A88"><div class="momento-num">M2</div><div class="momento-nombre">La Excavación</div></div><div class="momento-contenido"><div class="momento-titulo-contenido">Pasión 1 · La pregunta raíz</div><div class="momento-texto">¿Por qué confiar en los demás y en procesos colectivos es un riesgo que suele terminar en decepción?</div></div></div>
+            <div class="momento-paso m3"><div class="momento-etiqueta" style="border-color:#FFD700"><div class="momento-num">M3</div><div class="momento-nombre">El Reconocimiento</div></div><div class="momento-contenido"><div class="momento-titulo-contenido">Pasión 2 · Supuesto Básico</div><div class="momento-texto frase-supuesto">«Confiar es ser ingenuo en un mundo de intereses»</div><div class="sub-dato">Efecto: Desconfianza preventiva · Desconexión autoprotectora</div></div></div>
+            <div class="momento-paso m4"><div class="momento-etiqueta" style="border-color:#4ECDC4"><div class="momento-num">M4</div><div class="momento-nombre">El Despertar</div></div><div class="momento-contenido"><div class="momento-titulo-contenido">Pasión 3 · Nueva Verdad</div><div class="momento-texto">Conectarnos nos fortalece y nos protege de volver a ser engañados.</div></div></div>
+            <div class="momento-paso m5"><div class="momento-etiqueta" style="border-color:#4682B4"><div class="momento-num">M5</div><div class="momento-nombre">La Acción ALPHA</div></div><div class="momento-contenido"><div class="momento-titulo-contenido">Pasión 4 · La Semilla</div><div class="momento-texto">Partysipasión (Diversión-Convicción y pasión) y el acróstico del AMOR (Armonía; Motivación; Cultura Organizacional y De Crecimiento; Resiliencia): anticuerpos contra la corrupción y la destrucción. Nos conectamos para que la sangre circule con escudos.</div><div class="sueno-label">Sueño</div><div class="momento-texto"><em>Territorio con TEJIDO VIVO.</em></div></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ESQUELETO -->
+      <div class="organo-card" id="c5" style="--color-organo:#B0C4DE" onclick="toggleOrgano('c5')">
+        <div class="organo-header">
+          <div class="organo-emoji">🦴</div>
+          <div class="organo-info"><div class="organo-nombre" style="color:#B0C4DE">Esqueleto débil y sin estructura</div><div class="organo-diagnostico">Acciones aisladas, no sistémicas</div></div>
+          <div class="organo-resultado" style="color:#B0C4DE;border-color:#B0C4DE">Estructura que dura</div>
+          <div class="toggle-icon">▾</div>
+        </div>
+        <div class="momentos-wrap">
+          <div class="momentos-flow">
+            <div class="momento-paso m1"><div class="momento-etiqueta" style="border-color:#B0C4DE"><div class="momento-num">M1</div><div class="momento-nombre">La Herida</div></div><div class="momento-contenido"><div class="momento-titulo-contenido">El órgano enfermo</div><div class="momento-texto">DIAGNÓSTICO DE ESTRUCTURA: Responde SÍ o NO: 1. ¿Tu organización/movimiento tiene plan escrito más allá de próxima elección?  2. ¿Tienen reuniones regulares (no solo cuando hay crisis)?  3. ¿Hay roles claros (no solo "líderes" y "seguidores")? 4. ¿Documentan aprendizajes para que nuevos miembros no empiecen de cero?  5. ¿Sobreviviría la organización si el líder principal se va?.</div></div></div>
+            <div class="momento-paso m2"><div class="momento-etiqueta" style="border-color:#B0C4DE88"><div class="momento-num">M2</div><div class="momento-nombre">La Excavación</div></div><div class="momento-contenido"><div class="momento-titulo-contenido">Pasión 1 · La pregunta raíz</div><div class="momento-texto">¿Por qué se cree que la política es corrupta por naturaleza?</div></div></div>
+            <div class="momento-paso m3"><div class="momento-etiqueta" style="border-color:#FFD700"><div class="momento-num">M3</div><div class="momento-nombre">El Reconocimiento</div></div><div class="momento-contenido"><div class="momento-titulo-contenido">Pasión 2 · Supuesto Básico</div><div class="momento-texto frase-supuesto">«El poder es intrínsecamente corrupto. La integridad es incompatible con la política real»</div><div class="sub-dato">Efecto: Desprecio generalizado · Dependencia de personas, no de sistemas</div></div></div>
+            <div class="momento-paso m4"><div class="momento-etiqueta" style="border-color:#4ECDC4"><div class="momento-num">M4</div><div class="momento-nombre">El Despertar</div></div><div class="momento-contenido"><div class="momento-titulo-contenido">Pasión 3 · Nueva Verdad</div><div class="momento-texto">Sin estructura organizacional y sistemática no hay transformación sostenible.</div></div></div>
+            <div class="momento-paso m5"><div class="momento-etiqueta" style="border-color:#4682B4"><div class="momento-num">M5</div><div class="momento-nombre">La Acción ALPHA</div></div><div class="momento-contenido"><div class="momento-titulo-contenido">Pasión 4 · La Semilla</div><div class="momento-texto">«Tácticas Vivas ALPHAS»: acciones sistemáticas -4PExRE—4 Principios Estratégicos Xa Resultados Extraordinarios- y con sentido que construyen lo que dura.</div><div class="sueno-label">Sueño</div><div class="momento-texto"><em>Territorio con ESTRUCTURA QUE DURA</em></div></div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"><span class="divider-sym">· · ·</span></div>
+
+  <!-- S5 SECUENCIA -->
+  <section class="seccion" id="s-secuencia">
+    <p class="label-seccion">🧭 Secuencia de Memorabilidad</p>
+    <h2 class="titulo-seccion" style="margin-bottom:0.75rem;">Cuando los 5 órganos<br><em>sanan</em>, el territorio despierta</h2>
+    <p class="descripcion" style="margin-bottom:2rem;">Esta es la secuencia completa del «Cuerpo de «Esperanzía»»: el resultado visible de aplicar el Sistema Operativo Vivo ALPHA en un proyecto territorial para el 2027.</p>
+    <div class="secuencia-wrap">
+      <div class="seq-item"><div class="seq-emoji">❤️</div><div class="seq-palabra">Identidad</div><div class="seq-organo">Corazón</div></div>
+      <div class="seq-item"><div class="seq-emoji">🧠</div><div class="seq-palabra">Propósito</div><div class="seq-organo">Cabeza</div></div>
+      <div class="seq-item"><div class="seq-emoji">⚡</div><div class="seq-palabra">Sentir</div><div class="seq-organo">Nervioso</div></div>
+      <div class="seq-item"><div class="seq-emoji">🩸</div><div class="seq-palabra">Organización</div><div class="seq-organo">Sangre</div></div>
+      <div class="seq-item"><div class="seq-emoji">🦴</div><div class="seq-palabra">Estructura</div><div class="seq-organo">Esqueleto</div></div>
+    </div>
+    <blockquote class="cita-alpha">«Un territorio despierta cuando se reconoce, encuentra su propósito, vuelve a sentir, se organiza y construye lo que perdura y trasciende.»</blockquote>
+  </section>
+
+  <div class="divider"><span class="divider-sym">· · ·</span></div>
+
+  <!-- CIERRE -->
+  <section class="seccion" id="s-cierre">
+    <div class="cierre-block">
+      <div class="logo-alpha cierre">
+<img src="https://i.imgur.com/twSFmew.png" alt="ALPHAS Consulting">
+</div>
+<p class="label-seccion" style="margin-bottom:1.5rem;">🎭 El ArtEZano De La Política</p>
+      <p class="frase-cierre">«Pensar como pedagogo de territorio.<br>Narrar como ArtEZano.<br>Construir como ingeniero de campo.»</p>
+      <p class="descripcion">Ser «ArtEZano De La Política» es tejer «Esperanzía», unir hilos rotos, construir algo que antes no existía. «La Jugada Maestra» es este sistema: vivo, orgánico y comprobado en cientos de territorios de Colombia.</p>
+      <div class="hashtags">
+        <span class="hashtag">#PedagogíaConElArtEZano</span>
+        <span class="hashtag">#ElCuerpoDeEsperanzía</span>
+        <span class="hashtag">#LaJugadaMaestra</span>
+        <span class="hashtag">#SistemaOperativoVivoALPHA</span>
+      </div>
+      <p class="firma"><strong>El ArtEZano De La Política</strong> · ALPHAS Consulting · Santa Marta, Colombia · <br><a href="https://wa.me/573193864348" target="_blank" class="whatsapp-cta">📲 WhatsApp: 319 386 4348</a><br><em>Sistema Operativo Vivo ALPHA · «La Jugada Maestra»</em></p>
+    </div>
+  </section>
+</div>
+
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<div class="copyright-footer">
+  © 2026 Esteban Zambrano. Esta app está protegida por derechos de autor.<br>
+  Licenciada bajo <a href="https://creativecommons.org/licenses/by-nd/4.0/" target="_blank" rel="noopener noreferrer">CC BY-ND 4.0</a>.
+  No se permite modificar ni eliminar este aviso ni el logotipo original.
+</div>
+
+</script>
+<script>
+/* CONFIGURACIÓN CENTRAL DEL PORTAL ALPHA */
+const PORTAL_ALPHA_CONFIG = {
+  modulo: "Sistema Operativo Vivo ALPHA",
+  logo: "https://i.imgur.com/twSFmew.png",
+  contexto: "PROYECTO TERRITORIAL · 2027",
+  whatsapp: "3193864348",
+  destino: "experiencia-interna",
+  narrativa: [
+    "Un territorio puede enfermar.",
+    "También puede reconocer sus heridas.",
+    "Puede volver a sentir.",
+    "Puede encontrar un propósito compartido.",
+    "Puede organizarse.",
+    "Y construir lo que perdura y trasciende."
+  ],
+  cta: "Entrar a la experiencia"
+};
+
+let timerInterval=null,segundosRestantes=540;
+
+function crearParticulasPortal(){
+  const contenedor=document.getElementById('alphaParticles');
+  if(!contenedor) return;
+  const cantidad=18;
+  for(let i=0;i<cantidad;i++){
+    const p=document.createElement('span');
+    p.className='alpha-particle';
+    const size=(Math.random()*3+1).toFixed(1);
+    p.style.width=size+'px';
+    p.style.height=size+'px';
+    p.style.left=(Math.random()*100)+'%';
+    p.style.top=(55+Math.random()*45)+'%';
+    p.style.animationDuration=(7+Math.random()*8).toFixed(2)+'s';
+    p.style.animationDelay=(Math.random()*7).toFixed(2)+'s';
+    contenedor.appendChild(p);
+  }
+}
+crearParticulasPortal();
+
+
+function togglePortalCopyright(){
+  const portal = document.getElementById('portal');
+  const panel = portal ? portal.querySelector('.portal-copyright') : null;
+  const button = portal ? portal.querySelector('.portal-copyright-toggle') : null;
+  if(!portal || !panel) return;
+  const open = panel.classList.toggle('is-visible');
+  portal.classList.toggle('copyright-visible', open);
+  if(button) button.setAttribute('aria-expanded', open ? 'true' : 'false');
+}
+
+function iniciarExperiencia(){
+const portal=document.getElementById('portal');
+portal.classList.add('oculto');
+const app=document.getElementById('app');
+app.style.display='block';
+
+setTimeout(()=>{
+iniciarObserver();
+iniciarTimer();
+activarMomento3(); // 👈 correcto aquí
+document.getElementById('s-raiz').classList.add('visible');
+},300);
+}
+
+function iniciarTimer(){
+actualizarDisplay();
+timerInterval=setInterval(()=>{
+if(segundosRestantes>0){
+segundosRestantes--;
+actualizarDisplay();
+actualizarProgress();
+}else{
+clearInterval(timerInterval);
+document.getElementById('timerDisplay').textContent='✓ Listo';
+document.getElementById('timerDisplay').style.color='#4ECDC4';
+}
+},700);
+}
+
+function actualizarDisplay(){
+const m=Math.floor(segundosRestantes/60),
+s=segundosRestantes%60;
+document.getElementById('timerDisplay').textContent=
+`${m}:${s.toString().padStart(2,'0')}`;
+}
+
+function actualizarProgress(){
+const pct=((540-segundosRestantes)/540)*100;
+document.getElementById('progressBar').style.width=pct+'%';
+}
+
+function iniciarObserver(){
+const secciones=document.querySelectorAll('.seccion');
+const obs=new IntersectionObserver((entries)=>{
+entries.forEach(e=>{
+if(e.isIntersecting)
+e.target.classList.add('visible');
+});
+},{threshold:0.1});
+
+secciones.forEach(s=>obs.observe(s));
+}
+
+function toggleOrgano(id){
+const card=document.getElementById(id);
+const estaExpandido=card.classList.contains('expandido');
+
+document.querySelectorAll('.organo-card')
+.forEach(c=>c.classList.remove('expandido'));
+
+if(!estaExpandido){
+card.classList.add('expandido');
+setTimeout(()=>{
+card.scrollIntoView({behavior:'smooth',block:'nearest'});
+},100);
+}
+}
+
+function expandirOrgano(id){
+document.querySelectorAll('.organo-card')
+.forEach(c=>c.classList.remove('expandido'));
+
+const card=document.getElementById(id);
+card.classList.add('expandido');
+
+setTimeout(()=>{
+card.scrollIntoView({behavior:'smooth',block:'start'});
+},150);
+}
+
+window.addEventListener('scroll',()=>{
+const btn=document.getElementById('scrollTop');
+if(window.scrollY>400)
+btn.classList.add('visible');
+else
+btn.classList.remove('visible');
+});
+
+/* 🔥 EFECTO MOMENTO 3 */
+function activarMomento3(){
+const momentos3 = document.querySelectorAll('.m3');
+
+const observer = new IntersectionObserver((entries)=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting){
+const el = entry.target;
+
+if(!el.classList.contains('activo')){
+el.classList.add('activo');
+
+// 🎧 micro vibración narrativa
+if(navigator.vibrate){
+navigator.vibrate([80,40,120]);
+}
+
+
+// 💡 pequeño “delay humano” para reforzar quiebre
+setTimeout(()=>{
+el.classList.add('impacto');
+},150);
+}
+}
+});
+},{threshold:0.65});
+
+momentos3.forEach(m=>observer.observe(m));
+}
+</script>
+<div class="alpha-legal-footer" aria-hidden="true" style="display:none">© 2026 Esteban Zambrano. Esta app está protegida por derechos de autor.<br>
+Licenciada bajo <a href="https://creativecommons.org/licenses/by-nd/4.0/" target="_blank" rel="noopener noreferrer">CC BY-ND 4.0</a>.<br>
+No se permite modificar ni eliminar este aviso ni el logotipo original.</div>
+<style>.alpha-legal-footer{position:fixed;left:0;right:0;bottom:0;z-index:9998;text-align:center;padding:.42rem .7rem;background:rgba(8,37,103,.94);color:#B0C4DE;font:600 .62rem/1.35 Poppins,sans-serif;backdrop-filter:blur(8px)}.alpha-legal-footer a{color:#B0C4DE}</style>
+</body>
+</html>
+
